@@ -11,6 +11,7 @@ RUN pip install hadolint ignore=DL3013
 EXPOSE 80
 
 CMD ["python", "app.py"]
+
 ## Step 1:
 # Create a working directory
 
