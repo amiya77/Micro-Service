@@ -1,5 +1,16 @@
 FROM python:3.7.3-stretch
 
+WORKDIR /python
+
+COPY . .
+
+RUN pip install -r requirement.txt
+
+RUN pip install hadolint ignore=DL3013
+
+EXPOSE 80
+
+CMD ["python", "app.py"]
 ## Step 1:
 # Create a working directory
 
