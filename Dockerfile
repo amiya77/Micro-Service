@@ -6,8 +6,6 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-RUN pip install hadolint ignore=DL3013
-
 EXPOSE 80
 
 CMD ["python", "app.py"]
