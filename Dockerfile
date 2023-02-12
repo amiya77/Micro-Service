@@ -4,7 +4,7 @@ WORKDIR /python
 
 COPY . .
 
-RUN pip install -r requirement.txt
+RUN pip install -r requirements.txt
 
 RUN pip install hadolint ignore=DL3013
 
