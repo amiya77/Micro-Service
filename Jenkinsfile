@@ -1,26 +1,30 @@
 #!/usr/bin/env groovy
 pipeline {
-    agent {
-        node any
-    }
+    agent any
 
     stages {
-        stage('Build Image') {
-            when {
-                branch 'master'  //only run these steps on the master branch
+        stage('CloneRepo') {
+            steps {
+                git branch: 'main', credentialsId: 'admin', url: 'https://github.com/amiya77/Micro-Service.git'
             }
-
-            // Jenkins Stage to Build the Docker Image
-
         }
 
-        stage('Publish Image') {
-            when {
-                branch 'master'  //only run these steps on the master branch
+        stage('Build') {
+            steps {
+                sh 'docker build -t build-project1 .'
             }
-            
-            // Jenkins Stage to Publish the Docker Image to Dockerhub or any Docker repository of your choice.
-
+        }
+        
+        stage('Tag') {
+            steps {
+                sh 'docker tag build-project1 amiya777/build-project1'
+                sh 'docker push amiya777/build-project1'
+            } 
+        }
+        stage('Run') {
+            steps {
+                sh 'docker run -d -p 80:8000 build-project1:latest'
+            }
         }
     }
 }
